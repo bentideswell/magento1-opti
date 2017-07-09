@@ -1,0 +1,85 @@
+<_>
+   <form_key>sXHzZA9naT1wVJWC</form_key>
+   <name>Fishpig_Opti</name>
+   <channel>community</channel>
+   <version_ids>
+      <version_ids>2</version_ids>
+   </version_ids>
+   <summary>HTML, JS &amp; CSS minification.</summary>
+   <description>HTML, JS &amp; CSS minification.</description>
+   <license>FishPig EULA</license>
+   <license_uri>http://fishpig.co.uk/license.txt</license_uri>
+   <version>2.1.1.12</version>
+   <stability>stable</stability>
+   <notes>For changelog, please see https://fishpig.co.uk/magento/extensions/minify/#changelog</notes>
+   <authors>
+      <name>
+         <name>fishpig</name>
+      </name>
+      <user>
+         <user>fishpig</user>
+      </user>
+      <email>
+         <email>ben@fishpig.co.uk</email>
+      </email>
+   </authors>
+   <depends_php_min>5.2.0</depends_php_min>
+   <depends_php_max>8.0.0</depends_php_max>
+   <depends>
+      <package>
+         <name>
+            <name/>
+         </name>
+         <channel>
+            <channel/>
+         </channel>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+         <files>
+            <files>                                                                             </files>
+         </files>
+      </package>
+      <extension>
+         <name>
+            <name>PDO</name>
+         </name>
+         <min>
+            <min/>
+         </min>
+         <max>
+            <max/>
+         </max>
+      </extension>
+   </depends>
+   <contents>
+      <target>
+         <target>magelocal</target>
+         <target>magecommunity</target>
+         <target>mageweb</target>
+      </target>
+      <path>
+         <path/>
+         <path>Fishpig/Opti</path>
+         <path>app/etc/modules/Fishpig_Opti.xml</path>
+      </path>
+      <type>
+         <type>file</type>
+         <type>dir</type>
+         <type>file</type>
+      </type>
+      <include>
+         <include/>
+         <include/>
+         <include/>
+      </include>
+      <ignore>
+         <ignore/>
+         <ignore/>
+         <ignore/>
+      </ignore>
+   </contents>
+</_>

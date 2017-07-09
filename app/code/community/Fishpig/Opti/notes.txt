@@ -1,0 +1,157 @@
+/**
+ * @category Fishpig
+ * @package Fishpig_Opti
+ * @license http://fishpig.co.uk/license.txt
+ * @author Ben Tideswell <ben@fishpig.co.uk>
+ */
+
+CHANGELOG
+- 2.1.1.11
+- Fixed issue with data URL SVG's.
+
+- 2.1.1.10
+- Fixed issue that stopped minified files from being cached.
+
+- 2.1.1.9
+- Fixed issue with some files not being minified.
+
+- 2.1.1.3
+- Fixed CSSmin case issue.
+
+- 2.1.1.2
+- Added configuration options to enable/disable inline minification of JS and CSS.
+
+- 2.1.1.1
+- Added versioning filenames. As you change a JS/CSS file, the filename will automatically update and trigger a file refresh in the browser. File names longer than 36 characters are now hashed to make them smaller.
+
+- 2.1.1.0
+- Fixed a few bugs and improved performance of JS minification.
+
+- 2.1.0.2
+- Fixed issue that occurs when Minify JS is disabled but Move to Bottom is enabled.
+
+- 2.1.0.1
+- Fixed issue with CSS3 calc function being minified incorrectly.
+
+- 2.1.0.0
+- Force CSS to be delivered via JS to stop render blocking issues.
+
+- 2.0.0.15
+- Fixed issue with closing IE conditional tags
+
+- 2.0.0.14
+- Fixed issue with the css_secure directory not being minified.
+
+- 2.0.0.11
+- Fixed issue with <style> tags not being minified when no attributes were set.
+
+- 2.0.0.6
+- Added support to exclude certain items from being moved to the bottom or minified. To stop something being moved to the bottom, add opti-skip-move="true" to the tag. To stop something from being minified add opti-skip-minify="true" to the tag.
+
+- 2.0.0.2
+- Rewritten module. Includes functionality to move CSS to the bottom (you can already move JS to the bottom as of version 1.7.0.0).
+
+- 1.7.0.0
+- Added option to move JS to the bottom of the page.
+
+- 1.6.1.1
+- Added fix so it's possible to get 100% on HTML Minify speed test using gtmetrix.com
+
+- 1.6.0.9
+- Fix for certain file paths that don't get minified.
+
+- 1.6.0.8
+- Fixed CSS minification for CSS files that contain data URIs. These were previously treated as relative URLs but are now left alone.
+
+- 1.6.0.7
+- Modified comment removal to work properly with hole punching in Bolt. Comments are still removed from the HTML but not until after Bolt has punched the holes.
+
+- 1.6.0.6
+- Improved HTML minification in a way that will minify the HTML more than ever. It's highly recommend that you use Opti with a Full Page Cache so that the HTML minification is cached for each request.
+
+- 1.6.0.5
+- Added a basic comment remover from the HTML minification. This removes the comments used by Bolt (these aren't needed by the time the request gets to the client).
+
+- 1.6.0.4
+- Improved the HTML minification so that most speed report scores for Minify HTML will go from 99 to 100.
+
+- 1.6.0.3
+- Added opti/source_blocks configuration node so that custom 'page/html_head' blocks can be placed around your site and compressed using this extension.
+
+- 1.6.0.2
+- A configuration option has been added that will enable minifying inline CSS. When enabled, any style tags on your site will be minified. This option comes enabled by default.
+
+- 1.6.0.0
+- The minified JS and CSS file names have been changed to a hash of file related data which includes the time the file was last edited. This means that each time you update a CSS or JS file, the cached version will automatically be recreated. With this feature, you no longer have to manually clear the cached files each time you make a change.
+
+- 1.5.3.0
+- Added ability to minify hardcoded JS and CSS files (default=On)
+
+- 1.5.2.8
+- Updated minify library
+
+- 1.5.2.7
+- Improved CSS minification
+
+- 1.5.2.5
+- Removed a few bytes from merged JS files
+
+- 1.5.2.4
+- Added Mage_Newsletter to cacheable modules list
+
+- 1.5.2.3
+- Added store ID to merged JS filenames
+
+- 1.5.2.2
+- Fixed bug that triggered log entry when JS content was empty
+
+- 1.5.2.1
+- Fixed a bug that broke some URLs when minifying CSS files
+
+- 1.5.2.0
+- Added custom JS merging system to Admin
+
+- 1.5.0.0
+- Improved file structure
+- Improved HTML minification time
+
+- 1.4.8.0
+- skin_js fix
+
+- 1.4.7.0
+- Fixed issue that stops minification when compiler is enabled
+
+- 1.4.6.0
+- Fixed broken JS issue when filename has a '?' in it
+
+- 1.4.5.0
+- Added compression of skin JS files
+
+- 1.4.4.0
+- Added better error checking for extremely broken JS
+
+- 1.4.3.0
+- Fixed mobile theme CSS bug
+
+- 1.4.2.0
+- Fixed issue that sometimes stopped CDATA tags being added when required
+
+- 1.4.1.0
+- Moved secure CSS files to css_secure directory
+- Added Cdata tags into inline JS files that require it
+
+- 1.4.0.1
+- Added ?___refresh=opti functionality back in
+
+- 1.4.0.0
+- Added minification library files
+
+- 1.3.3.1
+- Fixed issue when bg images in CSS files started with /
+
+- 1.3.3.0
+- Added protection to textarea's
+- Simplified module selector
+
+- 1.3.2.0
+- Stopped compressing non-html responses. This fixes an issue that caused XML files that were dynamically generated by Magento to be minified.
