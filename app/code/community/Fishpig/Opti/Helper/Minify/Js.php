@@ -50,11 +50,19 @@ class Fishpig_Opti_Helper_Minify_Js extends Fishpig_Opti_Helper_Minify_Abstract
 	 **/
 	protected function _getSources()
 	{
-		return array(
+    $sources = array(
 			Mage::getBaseDir('skin') . DS => Mage::getBaseUrl('skin'),
 			Mage::getBaseDir() . DS . 'js' . DS => Mage::getBaseUrl('js'),
 			Mage::getBaseDir('media') . DS . 'js' . DS => Mage::getBaseUrl('media') . 'js/',
 		);
+		
+    if (Mage::helper('opti')->isWordPressIntegrationInstalled()) {
+      if ($path = Mage::helper('wordpress')->getWordPressPath()) {
+        $sources[$path] = Mage::helper('wordpress')->getBaseUrl();
+      }
+    }
+
+    return $sources;
 	}
 	
 	/**
@@ -92,13 +100,9 @@ class Fishpig_Opti_Helper_Minify_Js extends Fishpig_Opti_Helper_Minify_Abstract
 		$js = $this->_removeExtraComments($js);
 
 #		$cdata = !$url && strpos($js, '&') !== false || strpos($js, '<') !== false;
-
-		if (!$this->_includeLibrary('JSMin')) {
-			return $js;
-		}
 		
 		try {
-			$js = JSMin::minify($js);
+			$js = \JSMin\JSMin::minify($js);
 		}
 		catch (Exception $e) {}
 

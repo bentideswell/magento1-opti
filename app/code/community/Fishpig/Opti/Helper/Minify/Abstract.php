@@ -71,6 +71,11 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 	**/
 	public function minifyUrl($url)
 	{
+  	// Add protocol to protocol-less URLs
+  	if (substr($url, 0, 2) === '//') {
+      $url = 'http' . (Mage::app()->getStore()->isCurrentlySecure() ? 's' : '') . ':' . $url;
+  	}
+  	
 		# If file already minified, don't minify anymore
 		if (strpos(basename($url), '.min.') !== false) {
 			return $url;
@@ -80,10 +85,8 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 		if (strpos($url, 'opti-') !== false) {
 			return $url;
 		}
-		
-		$sources = $this->_getSources();
-		
-		if (!$sources) {
+
+		if (!($sources = $this->_getSources())) {
 			return $url;
 		}
 
@@ -103,7 +106,7 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 			if (strpos($url, $sourceUrl) !== 0) {
 				continue;
 			}
-	
+
 			$localFilename = substr($url, strlen($sourceUrl));
 			
 			if (($queryPosition = strpos($localFilename, '?')) !== false) {
@@ -117,7 +120,7 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 				break;
 			}
 		}
-		
+
 		if (!$localFile || !is_file($localFile)) {
 			return $url;
 		}
@@ -127,12 +130,12 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 
 		if ($this->canVersionFilename()) {
 			$minifiedLocalFilename = basename($minifiedLocalFilename, $fileExtension) . '-' . filemtime($localFile) . $fileExtension;			
-		}
 
-		# If filename is longer than 32 chars, hash it to shorten it		
-		if (strlen($minifiedLocalFilename) > 35) {
-			$minifiedLocalFilename = md5($minifiedLocalFilename) . $fileExtension;
-		}
+      # If filename is longer than 32 chars, hash it to shorten it		
+      if (strlen($minifiedLocalFilename) > 35) {
+  			$minifiedLocalFilename = md5($minifiedLocalFilename) . $fileExtension;
+      }
+    }
 
 		if (self::DEBUG || !is_file($targetDir . $minifiedLocalFilename)) {
 			 if (($content = trim(file_get_contents($localFile))) === '') {
@@ -146,6 +149,7 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 			@file_put_contents($targetDir . $minifiedLocalFilename, $minfiedContent);
 				
 			if (!is_file($targetDir . $minifiedLocalFilename)) {
+
 				return $url;
 			}
 		}
@@ -170,7 +174,7 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 	**/
 	protected function _getSources()
 	{
-		return false;
+  	return false;
 	}
 	
 	/**
@@ -203,20 +207,7 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 	 */
 	protected function _includeLibrary($class)
 	{
-		if (!defined('COMPILER_INCLUDE_PATH')) {
-			$includePath = get_include_path();
-			
-			set_include_path($includePath . PS . Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'Lib' . DS . 'Minify');
-			
-			$result = class_exists($class);
-			
-			set_include_path($includePath);
-		}
-		else {
-			@include_once(COMPILER_INCLUDE_PATH . DS . 'Fishpig_Opti_Lib_Minify_' . $class . '.php');
 
-			$result = class_exists($class);
-		}
 
 		return $result;
 	}

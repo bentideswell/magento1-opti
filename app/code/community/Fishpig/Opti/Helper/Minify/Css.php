@@ -50,11 +50,19 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 	**/
 	protected function _getSources()
 	{
-		return array(
+		$sources = array(
 			Mage::getBaseDir('media') . DS . 'css' . DS => Mage::getBaseUrl('media') . 'css/',
 			Mage::getBaseDir('media') . DS . 'css_secure' . DS => Mage::getBaseUrl('media') . 'css_secure/',
 			Mage::getBaseDir('skin') . DS => Mage::getBaseUrl('skin'),
 		);
+		
+    if (Mage::helper('opti')->isWordPressIntegrationInstalled()) {
+      if ($path = Mage::helper('wordpress')->getWordPressPath()) {
+        $sources[$path] = Mage::helper('wordpress')->getBaseUrl();
+      }
+    }
+
+    return $sources;
 	}
 	
 	/**
@@ -82,71 +90,6 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 	 */
 	public function minify($css, $url = null, $id = 1)
 	{
-		if (!$this->_includeLibrary('CSSmin')) {
-			return $css;	
-		}
-
-		/*		
-		$css = preg_replace('/\/\*.*\*\//Us', '', $css);
-		$css = preg_replace('/[\s]{0,}\{[\s]{0,}/s', '{', $css);
-		$css = preg_replace('/[\s]{0,}\}[\s]{0,}/s', '}', $css);
-		$css = preg_replace('/[\s]{1,}/', ' ', $css);
-		$css = str_replace('; ', ';', $css);
-		$css = preg_replace('/(:|,)[\s]{1,}/', '$1', $css);
-		*/
-/*
-		if (strlen($css) > self::MAX_CSS_LENGTH) {
-			if (strpos($css, '@media') !== false) {
-				$parts = explode('@media', $css);
-				
-				if (strpos($css, '@media') === 0) {
-					$parts[0] = '@media' . $parts[0];
-				}
-				
-				foreach($parts as $key => $part) {
-					if ((int)$key > 0) {
-						$parts[$key] = '@media' . $part;
-					}
-				}
-			}
-			else {
-				$parts = array($css);
-			}
-			
-			foreach($parts as $key => $part) {
-				if (strlen($part) > self::MAX_CSS_LENGTH) {
-					$parts[$key] = '';
-					
-					while(strlen($part) > self::MAX_CSS_LENGTH) {
-						$buffer = substr($part, 0, self::MAX_CSS_LENGTH);
-						
-						$buffer = substr($buffer, 0, strrpos($buffer, "}")+2);
-						$part = substr($part, strlen($buffer));
-echo $buffer;exit;
-						++$id;
-						echo '1-' . $id . ': ' . strlen($buffer);
-	
-						$parts[$key] .= $this->minify($buffer, $url, $id);
-						
-						echo  '!' . PHP_EOL;
-					}
-					
-					if (strlen($part) > 0) {
-						++$id;
-						echo '2-' . $id . ': ' . strlen($part);
-						$parts[$key] .= $this->minify($part, $url, $id);
-						echo  '!' . PHP_EOL;
-					}
-				}
-				else {
-						++$id;
-					echo '3-' . $id . ': ' . strlen($part);
-					$parts[$key] = $this->minify($part, $url, $id);
-					echo  '!' . PHP_EOL;
-				}
-			}
-		}
-*/
 		// Fix for the big issue
 		$css = str_replace('\"', '"', $css); 
 		
@@ -229,7 +172,7 @@ echo $buffer;exit;
 	protected function _getCssMin()
 	{
 		if ($this->_cssMin === null) {
-			$this->_cssMin = new CSSmin(false);
+			$this->_cssMin = new tubalmartin\CssMin\Minifier;
 		}
 		
 		return $this->_cssMin;

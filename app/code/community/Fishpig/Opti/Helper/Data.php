@@ -25,4 +25,14 @@ class Fishpig_Opti_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		return Mage::getStoreConfigFlag('opti/conditions/enabled') || self::DEBUG === true;
 	}
+
+	/*
+   *
+   *
+   * @return bool
+   */
+	public function isWordPressIntegrationInstalled()
+	{
+    return 'true' === (string)Mage::app()->getConfig()->getNode('modules/Fishpig_Wordpress/active');
+	}
 }

@@ -25,7 +25,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 	 * @var array
 	 */
 	protected $_safe = array();
-		
+  
+  /*
+   * @const bool
+   */
+  static protected $_libsIncluded = false;
+  
 	/**
 	 * Minify and move content
 	 *
@@ -38,6 +43,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			return $this;
 		}
 
+    if (Mage::helper('opti')->isWordPressIntegrationInstalled()) {
+      Mage::getSingleton('wordpress/observer')->injectWordPressContentObserver($observer);
+    }
+    
+    $this->_includeMinifyLibs();
+    
 		$html = $observer
 			->getEvent()
 				->getFront()
@@ -77,7 +88,8 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			foreach($elements as $type => $tags) {
 				$helper = $helpers[$type];
 
-				foreach($tags as $position => $tag) {					
+				foreach($tags as $position => $tag) {	
+  								
 					if ($helper->isMinifyAllowed()) {
 						if (strpos($tag['original'], 'opti-skip-minify') !== false) {
 							// Do nothing as minify is set to skip
@@ -357,5 +369,27 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 		}
 		
 		return false;
+	}
+	
+	/*
+   *
+   */
+	protected function _includeMinifyLibs()
+	{
+  	if (!self::$_libsIncluded) {
+    	self::$_libsIncluded = true;
+
+      $files = array(
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'jsmin-php' . DS . 'src' . DS . 'JSMin' . DS . 'JSMin.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Minifier.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Utils.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Colors.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Command.php',
+      );
+      
+      foreach($files as $file) {
+        include $file;
+      }
+    }
 	}
 }

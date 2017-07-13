@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Fishpig_Opti>
-			<version>2.1.1.12</version>
+			<version>2.2.0.0</version>
 		</Fishpig_Opti>
 	</modules>
 	<global>
@@ -38,7 +38,7 @@
 			<css>
 				<minify>1</minify>
 				<minify_inline>1</minify_inline>
-				<move_to_bottom>1</move_to_bottom>
+				<move_to_bottom>0</move_to_bottom>
 				<defer>0</defer>
 				<version_filenames>1</version_filenames>
 			</css>
