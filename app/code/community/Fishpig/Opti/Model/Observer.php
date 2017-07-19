@@ -57,28 +57,20 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 
 		$canUpdateBodyHtml = false;
 		$elements = array();
+		$htmlHelper = Mage::helper('opti/minify_html');
+		$moduleName = Mage::app()->getRequest()->getModuleName();
 		
 		$helpers = array(
-			'css' => Mage::helper('opti/minify_css'),
-			'js' => Mage::helper('opti/minify_js'),
+			self::TYPE_CSS => Mage::helper('opti/minify_css'),
+			self::TYPE_JS => Mage::helper('opti/minify_js'),
 		);
 		
 		$html = preg_replace_callback('/<pre[^>]{0,}>.*<\/pre>/Us', array($this, 'addToSafeCallback'), $html);
-
-		if ($helpers['css']->isMinifyAllowed() || $helpers['css']->isMoveToBottomAllowed()) {
-			$elements['css'] = $this->_getHtmlByTags(
-				$html, 
-				$helpers['css']->getRegexPatterns(),
-				self::TYPE_CSS
-			);
-		}
-
-		if ($helpers['js']->isMinifyAllowed() || $helpers['js']->isMoveToBottomAllowed()) {
-			$elements['js'] = $this->_getHtmlByTags(
-				$html, 
-				$helpers['js']->getRegexPatterns(),
-				self::TYPE_JS
-			);
+			
+		foreach($helpers as $type => $helper) {
+			if ($helper->isAllowedForModule($moduleName) && ($helper->isMinifyAllowed() || $helper->isMoveToBottomAllowed())) {
+				$elements[$type] = $this->_getHtmlByTags($html, $helper->getRegexPatterns(), $type);
+			}
 		}
 
 		if (count($elements) > 0) {
@@ -137,7 +129,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			}
 
 			$inTransit = '';
-			$newLine = Mage::helper('opti/minify_html')->isMinifyAllowed() ? '' : "\n";
+			$newLine = $htmlHelper->isMinifyAllowed() ? '' : "\n";
 	
 			foreach($elements as $type => $tags) {
 				ksort($tags);
@@ -171,14 +163,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			$html = str_replace(sprintf(self::SAFE_KEY_TEMPLATE, $key), $value, $html);
 		}
 
-		if (Mage::helper('opti/minify_html')->isMinifyAllowed()) {
+		if ($htmlHelper->isAllowedForModule($moduleName) && $htmlHelper->isMinifyAllowed()) {
 			$canUpdateBodyHtml = true;
-			$html = Mage::helper('opti/minify_html')->minify($html);
+			$html = $htmlHelper->minify($html);
 		}
 
 		if ($canUpdateBodyHtml) {
-#			$html = preg_replace("/\n[ ]{2,}/", " ", $html);
-
 			$observer->getEvent()
 				->getFront()
 					->getResponse()
@@ -286,9 +276,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			return false;
 		}
 
-		$allowedModules = (array)explode(',', trim(Mage::getStoreConfig('opti/conditions/modules'), ','));
-
-		return in_array(Mage::app()->getRequest()->getModuleName(), $allowedModules);
+		return true;
 	}
 	
 	/**

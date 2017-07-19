@@ -13,7 +13,19 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 	 *
 	**/
 	const DEBUG = false;
-	
+
+	/*
+	 *
+	 *
+	 */
+	public function isAllowedForModule($module, $storeId = null)
+	{
+		return in_array(
+			$module, 
+			(array)explode(',', trim(Mage::getStoreConfig('opti/' . $this->getClassType() . '/modules', $storeId), ','))
+		);
+	}
+
 	/**
 	 *
 	 * @param int $storeId - null
