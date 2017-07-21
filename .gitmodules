@@ -1,6 +1,0 @@
-[submodule "app/code/community/Fishpig/Opti/lib/jsmin-php"]
-	path = app/code/community/Fishpig/Opti/lib/jsmin-php
-	url = https://github.com/mrclay/jsmin-php.git
-[submodule "app/code/community/Fishpig/Opti/lib/cssmin-php"]
-	path = app/code/community/Fishpig/Opti/lib/cssmin-php
-	url = https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port.git

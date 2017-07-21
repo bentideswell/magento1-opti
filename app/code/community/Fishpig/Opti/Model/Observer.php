@@ -368,15 +368,15 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
     	self::$_libsIncluded = true;
 
       $files = array(
-        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'jsmin-php' . DS . 'src' . DS . 'JSMin' . DS . 'JSMin.php',
-        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Minifier.php',
-        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Utils.php',
-        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Colors.php',
-        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'cssmin-php' . DS . 'src' . DS . 'Command.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'JSMin' . DS . 'JSMin.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Minifier.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Utils.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Colors.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Command.php',
       );
-      
+
       foreach($files as $file) {
-        include $file;
+        include($file);
       }
     }
 	}

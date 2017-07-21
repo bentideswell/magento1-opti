@@ -9,7 +9,7 @@
    <description>HTML, JS &amp; CSS minification.</description>
    <license>FishPig EULA</license>
    <license_uri>http://fishpig.co.uk/license.txt</license_uri>
-   <version>2.2.1.0</version>
+   <version>2.2.1.1</version>
    <stability>stable</stability>
    <notes>For changelog, please see https://fishpig.co.uk/magento/extensions/minify/#changelog</notes>
    <authors>
