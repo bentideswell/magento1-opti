@@ -368,7 +368,13 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
     	self::$_libsIncluded = true;
 
       $files = array(
+	      // JSMin
         Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'JSMin' . DS . 'JSMin.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'JSMin' . DS . 'UnterminatedCommentException.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'JSMin' . DS . 'UnterminatedRegExpException.php',
+        Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'JSMin' . DS . 'UnterminatedStringException.php',
+        
+        // CSSMin
         Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Minifier.php',
         Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Utils.php',
         Mage::getModuleDir('', 'Fishpig_Opti') . DS . 'lib' . DS . 'CSSMin' . DS . 'Colors.php',
