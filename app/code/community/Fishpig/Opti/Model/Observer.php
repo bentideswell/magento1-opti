@@ -382,7 +382,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
       );
 
       foreach($files as $file) {
-        include($file);
+		if (is_file($file)) {
+        	include($file);
+		}
+		else {
+			Mage::log($file . ' not found in Opti.', true, 'opti.log', true);
+		}
       }
     }
 	}
