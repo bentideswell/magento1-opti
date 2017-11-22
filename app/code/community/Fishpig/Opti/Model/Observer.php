@@ -169,6 +169,14 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 		}
 
 		if ($canUpdateBodyHtml) {
+			$transport = new Varien_Object(array('html' => $html));
+			
+			Mage::dispatchEvent('fishpig_opti_observer_after', array('observer' => $this, 'transport' => $transport));
+
+			if ($transport->getHtml()) {
+				$html = $transport->getHtml();
+			}
+			
 			$observer->getEvent()
 				->getFront()
 					->getResponse()
@@ -382,12 +390,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
       );
 
       foreach($files as $file) {
-		if (is_file($file)) {
+				if (is_file($file)) {
         	include($file);
-		}
-		else {
-			Mage::log($file . ' not found in Opti.', true, 'opti.log', true);
-		}
+				}
+				else {
+					Mage::log($file . ' not found in Opti.', true, 'opti.log', true);
+				}
       }
     }
 	}

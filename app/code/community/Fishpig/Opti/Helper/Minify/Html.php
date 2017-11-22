@@ -92,6 +92,9 @@ class Fishpig_Opti_Helper_Minify_Html extends Fishpig_Opti_Helper_Minify_Abstrac
 			
 			$httpHost = 'http' . (Mage::app()->getStore()->isCurrentlySecure() ? 's' : '') . '://' . Mage::app()->getRequest()->getHttpHost();
 	
+			// Fix URLs that end with a double slash
+			$html = str_replace($httpHost . '//', $httpHost . '/', $html);
+
 			$html = str_replace('src="' . $httpHost, 'src="', $html);
 			$html = str_replace('src=\'' . $httpHost, 'src=\'', $html);
 	
