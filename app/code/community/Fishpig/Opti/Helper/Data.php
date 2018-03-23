@@ -5,6 +5,7 @@
  * @license		http://fishpig.co.uk/license.txt
  * @author		Ben Tideswell <help@fishpig.co.uk>
  * @info			http://fishpig.co.uk/magento-optimisation.html
+ * @SkipObfuscation
  */
 
 class Fishpig_Opti_Helper_Data extends Mage_Core_Helper_Abstract

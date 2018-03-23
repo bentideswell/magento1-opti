@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Fishpig_Opti>
-			<version>2.2.2.3</version>
+			<version>2.2.2.6</version>
 		</Fishpig_Opti>
 	</modules>
 	<global>
@@ -36,6 +36,7 @@
 			</conditions>
 			<css>
 				<minify>1</minify>
+				<minify_dot_min>1</minify_dot_min>
 				<minify_inline>1</minify_inline>
 				<move_to_bottom>0</move_to_bottom>
 				<defer>0</defer>
@@ -45,10 +46,12 @@
 			<html>
 				<minify>1</minify>
 				<remove_base_url>1</remove_base_url>
+				<remove_input_type_text>1</remove_input_type_text>
 <modules>splash,catalog,catalogsearch,cms,contacts,customer,gls,newsletter,poll,review,sendfriend,splashpro,tag,wishlist,wordpress,wp_addon_cpt</modules>
 			</html>
 			<js>
 				<minify>1</minify>
+				<minify_dot_min>1</minify_dot_min>
 				<minify_inline>1</minify_inline>
 				<move_to_bottom>1</move_to_bottom>
 				<version_filenames>1</version_filenames>
@@ -56,24 +59,4 @@
 			</js>
 		</opti>
 	</default>
-	<fishpig>
-		<injection>
-			<Fishpig_Magento_License>
-				<Fishpig_Opti>
-					<Helper_License>
-						<ignore />
-					</Helper_License>
-				</Fishpig_Opti>
-			</Fishpig_Magento_License>
-		</injection>
-		<encode>
-  		<block_license>app/code/community/Fishpig/Opti/Block/System/Config/Form/Field/License.php</block_license>
-			<helper_license>app/code/community/Fishpig/Opti/Helper/License.php</helper_license>
-			<helper_minify_abstract>app/code/community/Fishpig/Opti/Helper/Minify/Abstract.php</helper_minify_abstract>
-			<helper_minify_css>app/code/community/Fishpig/Opti/Helper/Minify/Css.php</helper_minify_css>
-			<helper_minify_js>app/code/community/Fishpig/Opti/Helper/Minify/Js.php</helper_minify_js>
-			<helper_minify_html>app/code/community/Fishpig/Opti/Helper/Minify/Html.php</helper_minify_html>
-			<observer>app/code/community/Fishpig/Opti/Model/Observer.php</observer>
-		</encode>
-	</fishpig>
 </config>

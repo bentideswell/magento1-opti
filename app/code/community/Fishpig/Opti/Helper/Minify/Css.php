@@ -177,4 +177,24 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 		
 		return $this->_cssMin;
 	}
+	
+	/**
+	 *
+	 * @param int $storeId - null
+	 * @return bool
+	**/
+	public function isMoveToBottomAllowed($storeId = null)
+	{
+		return false;
+	}
+	
+	/**
+	 *
+	 * @param int $storeId - null
+	 * @return bool
+	**/
+	public function isDeferAllowed($storeId = null)
+	{
+		return false;
+	}
 }

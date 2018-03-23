@@ -107,7 +107,9 @@ class Fishpig_Opti_Helper_Minify_Html extends Fishpig_Opti_Helper_Minify_Abstrac
 		}
 
 		// Remove type="text" and type='text'
-		$html = preg_replace('/ type=[\'"]{1}text[\'"]{1}/', '', $html);
+		if (Mage::getStoreConfigFlag('opti/html/remove_input_type_text')) {
+			$html = preg_replace('/ type=[\'"]{1}text[\'"]{1}/', '', $html);
+		}
 
 		$tags = implode('|', array(
 			'h1',

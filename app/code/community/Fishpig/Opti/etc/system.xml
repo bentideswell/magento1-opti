@@ -55,11 +55,21 @@
             				<show_in_website>1</show_in_website>
             				<show_in_store>1</show_in_store>
             			</minify>
+            			<minify_dot_min>
+            				<label>Minify Minified Files</label>
+            				<comment>Minifies files with .min. in their name</comment>
+										<frontend_type>select</frontend_type>
+										<source_model>adminhtml/system_config_source_yesno</source_model>
+            				<sort_order>2</sort_order>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            			</minify_dot_min>
             			<minify_inline>
             				<label>Minify Inline CSS</label>
 							<frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
-            				<sort_order>2</sort_order>
+            				<sort_order>3</sort_order>
             				<show_in_default>1</show_in_default>
             				<show_in_website>1</show_in_website>
             				<show_in_store>1</show_in_store>
@@ -133,6 +143,16 @@
             				<show_in_store>1</show_in_store>
             				<depends><minify>1</minify></depends>
             			</remove_base_url>
+            			<remove_input_type_text>
+            				<label>Remove type="text" from Inputs</label>
+										<frontend_type>select</frontend_type>
+										<source_model>adminhtml/system_config_source_yesno</source_model>
+            				<sort_order>7</sort_order>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            				<depends><minify>1</minify></depends>
+            			</remove_input_type_text>
             			<modules>
             				<label>Allowed Modules</label>
 										<frontend_type>multiselect</frontend_type>
@@ -160,11 +180,21 @@
             				<show_in_website>1</show_in_website>
             				<show_in_store>1</show_in_store>
             			</minify>
+            			<minify_dot_min>
+            				<label>Minify Minified Files</label>
+            				<comment>Minifies files with .min. in their name</comment>
+										<frontend_type>select</frontend_type>
+										<source_model>adminhtml/system_config_source_yesno</source_model>
+            				<sort_order>2</sort_order>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            			</minify_dot_min>
             			<minify_inline>
             				<label>Minify Inline JS</label>
 										<frontend_type>select</frontend_type>
 										<source_model>adminhtml/system_config_source_yesno</source_model>
-            				<sort_order>2</sort_order>
+            				<sort_order>3</sort_order>
             				<show_in_default>1</show_in_default>
             				<show_in_website>1</show_in_website>
             				<show_in_store>1</show_in_store>

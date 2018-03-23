@@ -41,6 +41,16 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
 	 * @param int $storeId - null
 	 * @return bool
 	**/
+	public function isMinifyMinfiedAllowed($storeId = null)
+	{
+		return Mage::getStoreConfigFlag('opti/' . $this->getClassType() . '/minify_dot_min', $storeId);
+	}
+	
+	/**
+	 *
+	 * @param int $storeId - null
+	 * @return bool
+	**/
 	public function isMinifyInlineAllowed($storeId = null)
 	{
 		return Mage::getStoreConfigFlag('opti/' . $this->getClassType() . '/minify_inline', $storeId);
@@ -87,10 +97,12 @@ class Fishpig_Opti_Helper_Minify_Abstract extends Mage_Core_Helper_Abstract
   	if (substr($url, 0, 2) === '//') {
       $url = 'http' . (Mage::app()->getStore()->isCurrentlySecure() ? 's' : '') . ':' . $url;
   	}
-  	
+
 		# If file already minified, don't minify anymore
 		if (strpos(basename($url), '.min.') !== false) {
-			return $url;
+			if (!$this->isMinifyMinfiedAllowed()) {
+				return $url;
+			}
 		}
 		
 		# If file already minified by Opti, no point in minifying again

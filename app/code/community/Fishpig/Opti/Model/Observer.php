@@ -93,7 +93,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 							}
 						}
 						else if ($tag['type'] === 'inline') {
-							$tag['optimised'] = $helper->isMinifyInlineAllowed() ? $helper->minifyInline($tag['optimised']) : "\n" . $tag['optimised'] . "\n";
+							$tag['optimised'] = $helper->isMinifyInlineAllowed() ? $helper->minifyInline($tag['optimised']) : $tag['optimised'];
 						}
 						
 						if (isset($tag['inline_wrapper'])) {
@@ -150,7 +150,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			}
 
 			if ($inTransit) {
-				$html = substr($html, 0, strpos($html, '</body>')) . "\n" . $inTransit . "\n" . substr($html, strpos($html, '</body>'));
+				$html = substr($html, 0, strpos($html, '</body>')) . $inTransit . substr($html, strpos($html, '</body>'));
 			}
 			
 			$html = str_replace(array(' opti-skip-minify="true"', ' opti-skip-move="true"'), '', $html);

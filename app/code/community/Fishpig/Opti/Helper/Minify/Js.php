@@ -26,9 +26,9 @@ class Fishpig_Opti_Helper_Minify_Js extends Fishpig_Opti_Helper_Minify_Abstract
 			'<script[^>]{1,}src=[\'"]{1}(.*)[\'"]{1}[^>]{0,}><\/script>' => array('type' => 'external', 'attribute' => 'src'),
 		);
 		
-		if ($this->isMinifyInlineAllowed()) {
+#		if ($this->isMinifyInlineAllowed()) {
 			$patterns['<script[^>]{0,}>(.*)<\/script>'] = array('type' => 'inline', 'attribute' => null);
-		}
+#		}
 		
 		return $patterns;
 	}
