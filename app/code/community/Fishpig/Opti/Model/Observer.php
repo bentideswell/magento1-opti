@@ -44,7 +44,11 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 		}
 
     if (Mage::helper('opti')->isWordPressIntegrationInstalled()) {
-      Mage::getSingleton('wordpress/observer')->injectWordPressContentObserver($observer);
+			$wordPressObserver = Mage::getSingleton('wordpress/observer');
+			
+			if (method_exists($wordPressObserver, 'injectWordPressContentObserver')) {
+				$wordPressObserver->injectWordPressContentObserver($observer);
+			}
     }
     
     $this->_includeMinifyLibs();
