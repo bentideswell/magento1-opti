@@ -51,7 +51,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 			}
     }
     
-    $this->_includeMinifyLibs();
+    $this->includeMinifyLibs();
     
 		$html = $observer
 			->getEvent()
@@ -374,7 +374,7 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 	/*
    *
    */
-	protected function _includeMinifyLibs()
+	public function includeMinifyLibs()
 	{
   	if (!self::$_libsIncluded) {
     	self::$_libsIncluded = true;
