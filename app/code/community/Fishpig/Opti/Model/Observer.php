@@ -4,8 +4,8 @@
  * @package Fishpig_Opti
  * @author Ben Tideswell <help@fishpig.co.uk>
  * @info http://fishpig.co.uk/magento/extensions/minify/
+ * @Obfuscate
  */
-
 class Fishpig_Opti_Model_Observer extends Varien_Object
 {
 	/**
