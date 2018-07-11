@@ -81,7 +81,7 @@ class Fishpig_Opti_Helper_License extends Mage_Core_Helper_Abstract
 	 */
 	public function getLicenseValidationUrl($format = '')
 	{
-		return 'http://license.fishpig.co.uk/2.0/'
+		return 'https://license.fishpig.co.uk/2.0/'
 			. $this->getLicenseCode() 
 			. '/' 
 			. base64_encode(parse_url(Mage::getUrl('', array('_store' => 0, '_nosid' => true)),  PHP_URL_HOST))
