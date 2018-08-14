@@ -1,11 +1,14 @@
-/**
+/*
  * @category Fishpig
- * @package Fishpig_Opti
- * @license https://fishpig.co.uk/license.txt
- * @author Ben Tideswell <ben@fishpig.co.uk>
+ * @package  Fishpig_Opti
+ * @license  https://fishpig.co.uk/license.txt
+ * @author   Ben Tideswell <ben@fishpig.co.uk>
  */
 
 CHANGELOG
+- 2.2.2.11
+- Changed license URL to https
+
 - 2.2.2.5
 - Added option to minify files with .min. in their names. Enabled by default.
 - 2.2.2.4
