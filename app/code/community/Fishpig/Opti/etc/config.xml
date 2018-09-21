@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Fishpig_Opti>
-			<version>2.2.2.12</version>
+			<version>2.2.2.14</version>
 		</Fishpig_Opti>
 	</modules>
 	<global>
@@ -45,6 +45,7 @@
 			</css>
 			<html>
 				<minify>1</minify>
+				<minify_algorithm>quick</minify_algorithm>
 				<remove_base_url>1</remove_base_url>
 				<remove_input_type_text>1</remove_input_type_text>
 <modules>splash,catalog,catalogsearch,cms,contacts,customer,gls,newsletter,poll,review,sendfriend,splashpro,tag,wishlist,wordpress,wp_addon_cpt</modules>

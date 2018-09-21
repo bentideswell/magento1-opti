@@ -6,6 +6,9 @@
  */
 
 CHANGELOG
+- 2.2.2.14
+- Added Quick algorithm to HTML minification.
+
 - 2.2.2.11
 - Changed license URL to https
 
