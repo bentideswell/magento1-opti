@@ -124,11 +124,10 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 		if (strpos($css, 'calc(') !== false) {
 			if (preg_match_all('/calc\(.*[;\}]{1}/Us', $css, $matches)) {
 				foreach($matches[0] as $match) {
-					$css = str_replace(
-						$match,
-						str_replace(array('+', '-'), array(' + ', ' - '), $match),
-						$css
-					);
+					$fixed = str_replace(array('+', '-'), array(' + ', ' - '), $match);	
+					$fixed = preg_replace('/([\*+-]{1}) - /', '$1 -', $fixed);
+
+					$css = str_replace($match, $fixed, $css);
 				}
 			}
 			

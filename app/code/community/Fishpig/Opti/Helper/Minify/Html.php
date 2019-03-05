@@ -36,18 +36,13 @@ class Fishpig_Opti_Helper_Minify_Html extends Fishpig_Opti_Helper_Minify_Abstrac
 			);
 			
 			$tagString = '#____%s-%d____#';
-			
-			foreach($protect as $tag => $storage) {
-				if (strpos($html, '<' . $tag) === false) {
-					continue;
-				}
-				
-				if (preg_match_all('/(<' . $tag . '.*>.*<\/' . $tag . '>)/iUs', $html, $matches)) {
-					foreach($matches[1] as $it => $code) {
-						$protect[$tag][$it] = $code;
-	
-						$html = str_replace($code, sprintf($tagString, $tag, $it), $html);
-					}
+
+			if (preg_match_all('/<(' . implode('|', array_keys($protect)) . ')[^>]*>.*<\/\1>/iUs', $html, $matches)) {
+				foreach($matches[0] as $it => $code) {
+					$tag                = $matches[1][$it];
+					$protect[$tag][$it] = $code;
+
+					$html = str_replace($code, sprintf($tagString, $tag, $it), $html);
 				}
 			}
 	

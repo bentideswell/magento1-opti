@@ -6,6 +6,9 @@
  */
 
 CHANGELOG
+- 2.2.2.15
+- Fixed issue with minus numbers when using calc
+
 - 2.2.2.14
 - Added Quick algorithm to HTML minification.
 
