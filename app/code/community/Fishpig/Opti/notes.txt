@@ -6,6 +6,9 @@
  */
 
 CHANGELOG
+- 2.2.2.16
+- Removed minification of calc values
+
 - 2.2.2.15
 - Fixed issue with minus numbers when using calc
 

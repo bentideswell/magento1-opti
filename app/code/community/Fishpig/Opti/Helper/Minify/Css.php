@@ -110,6 +110,20 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 			}
 		}
 
+		$calcSafe = array();
+		
+		if (strpos($css, 'calc(') !== false) {
+			if (preg_match_all('/(calc\(.*)([;\}]{1})/Us', $css, $matches)) {
+				foreach($matches[1] as $key => $match) {
+					$endChar = $matches[2][$key];
+					
+					$css = str_replace($match, 'calc-fix-' . $key . ';', $css);
+					
+					$calcSafe[$key] = $match;
+				}
+			}
+		}
+		
 		// Minify the CSS
 		$css = $this->_getCssMin()->run($css);
 
@@ -120,6 +134,13 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 			}
 		}
 
+		if (count($calcSafe) > 0) {
+			foreach($calcSafe as $key => $match) {
+				$css = str_replace('calc-fix-' . $key, $match, $css);
+			}
+		}
+		
+		/*
 		// Fix broken calc's
 		if (strpos($css, 'calc(') !== false) {
 			if (preg_match_all('/calc\(.*[;\}]{1}/Us', $css, $matches)) {
@@ -137,7 +158,7 @@ class Fishpig_Opti_Helper_Minify_Css extends Fishpig_Opti_Helper_Minify_Abstract
 				$css
 			);
 		}
-
+*/
 		// Let's trim the fat from those base URLs
 		$baseUrl = $url === null ? null : dirname($url);
 
