@@ -247,11 +247,12 @@ class Fishpig_Opti_Model_Observer extends Varien_Object
 								$tags[$position]['urls'] = $urlMatches[1];
 							}
 						}
-						else {
-							if (preg_match('/(<(script|style)[^>]{0,}>)(.*)(<\/\2>)/Us', $tag, $wrapper)) {
-								$tags[$position]['inline_wrapper'] = $wrapper[1] . "%s" . $wrapper[4];
-								$tags[$position]['optimised'] = trim(str_replace(array($wrapper[1], $wrapper[4]), '', $tags[$position]['optimised']));
-							}
+						else if (strpos($tag, 'type="text/template"') !== false) {
+							unset($tags[$position]);
+						}
+						else	 if (preg_match('/(<(script|style)[^>]{0,}>)(.*)(<\/\2>)/Us', $tag, $wrapper)) {
+							$tags[$position]['inline_wrapper'] = $wrapper[1] . "%s" . $wrapper[4];
+							$tags[$position]['optimised'] = trim(str_replace(array($wrapper[1], $wrapper[4]), '', $tags[$position]['optimised']));
 						}
 					}
 				}
